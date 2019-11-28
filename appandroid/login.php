@@ -1,11 +1,12 @@
 <?php
-$conn = new mysqli("localhost", "id11661395_aplicacionado","appado","id11661395_aplicacionado");
+header('Content-Type: application/json');
+$conn = new mysqli("mysql.webcindario.com","appado","appado","appado");
 // Check connection
 
-$usuario=$_GET["usuario"];
-$contra=$_GET["pass"];
+$usuario=$_POST["usuario"];
+$contra=$_POST["pass"];
 
-$data =$conn -> query("SELECT * FROM login where (usuario='$usuario' or correo='$usuario') and pass='$contra'");
+$data =$conn -> query("SELECT * FROM login where usuario='$usuario' and pass='$contra'");
 if ($data->num_rows <0){
     echo '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> No se encontraron datos.</div>';
 
@@ -16,13 +17,13 @@ if ($data->num_rows <0){
         $id=$row["idlogin"];
         $usuario=$row["usuario"];
         $correo=$row["correo"];
-        $password=$row["password"];
+        $contra=$row["pass"];
         
     }
     
-   $res = array ($id,$usuario,$correo,$password);
+   $res = array ("id"=>$id,"usuario"=>$usuario,"correo"=>$correo,"pass"=>$contra);
    
-   return json_encode($res);
+   return print_r(json_encode($res));
     
 }
    

@@ -1,13 +1,13 @@
 <?php
-$conn = new mysqli("localhost","root","id11661395_aplicacionado");
+header('Content-Type: application/json');
+$conexion = new mysqli("mysql.webcindario.com","appado","appado","appado");
 // Check connection
 $usuario=$_POST["usuario"];
 $correo=$_POST["correo"];
 $contra=$_POST["pass"];
 
-$data = $conn -> query("INSERT INTO login (usuario,correo,pass) values('$usuario','$correo','$contra')";
-mysqli_stmt_bind_param($data,"sss",$usuario,$correo,$contra);
-mysqli_stmt_execute($data);
+$data = $conexion -> query("INSERT INTO login (usuario,correo,pass) values('$usuario','$correo','$contra')");
+
 $response = array();
 $response ["success"] =true;
 
